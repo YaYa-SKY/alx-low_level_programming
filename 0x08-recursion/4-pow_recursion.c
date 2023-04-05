@@ -1,4 +1,4 @@
-i#include "main.h"
+#include "main.h"
 /**
  * _pow_recursion - power
  * @x:int
