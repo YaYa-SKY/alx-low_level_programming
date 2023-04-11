@@ -1,49 +1,37 @@
-#include <stdlib.h>
 #include "main.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 /**
- * *str_concat - concatenates two strings
- * @s1: string to concatenate
- * @s2: other string to concatenate
- *
- * Return: pointer to the new string created (Success), or NULL (Error)
+ * str_concat - concatenates two strings.
+ * @s1: First string (Beginning)
+ * @s2: Second string (Ending)
+ * Return: Pointer to concatenated strings
  */
+
 char *str_concat(char *s1, char *s2)
 {
-	char *s3;
-	unsigned int i = 0, j = 0, len1 = 0, len2 = 0;
+	int i;
+	int len1;
+	int len2;
+	char *ret;
 
-	while (s1 && s1[len1])
-		len1++;
-	while (s2 && s2[len2])
-		len2++;
-
-	s3 = malloc(sizeof(char) * (len1 + len2 + 1)); //5
-	if (s3 == NULL)
+	len1 = 0;
+	len2 = 0;
+	if (s1 == NULL)
+		s1 = "\0";
+	if (s2 == NULL)
+		s2 = "\0";
+	for (i = 0; s1[i] != '\0'; i++)
+		len1 += 1;
+	for (i = 0; s2[i] != '\0'; i++)
+		len2 += 1;
+	ret = malloc(len1 + len2 + 1);
+	if (ret == NULL)
 		return (NULL);
-
-	i = 0;//s1=he
-	j = 0;//s2=is
-
-	if (s1)
-	{
-		while (i < len1) //i=0 len=2
-		{
-			s3[i] = s1[i]; // s3[0]=s1[0]=h
-			i++; //s3[i]=1 s1[1]=e
-		}		// s3[i]=he;
-	}
-
-	if (s2)
-	{
-		while (i < (len1 + len2))
-		{
-			s3[i] = s2[j];   // s3[i]=he, s2[j]=0
-			i++;             //s3[i]=he,i=2+1 s2[j]=i == s3[i]=hei
-			j++;             //s3[i]=he,i=3+1 s2[j]=s == s3[i]=heis
-		}
-	}// i=4
-	s3[i] = '\0';   add null char                 // s3[i]=heis + '\0'
-
-	return (s3);
+	for (i = 0; i < len1; i++)
+		ret[i] = s1[i];
+	for (i = len1; i < (len1 + len2); i++)
+		ret[i] = s2[i - len1];
+	return (ret);
 }
