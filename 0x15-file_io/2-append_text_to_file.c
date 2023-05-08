@@ -1,30 +1,30 @@
 #include "main.h"
-
+#include <stdio.h>
+#include <stdlib.h>
 /**
- * append_text_to_file - Function that creates a file
- * @filename: type char filename pointer of FD
- * @text_content: type char pointer of char
+ * append_text_to_file - appends text at the end of a file
+ * @filename: the name of the file to append to
+ * @text_content: the text to append to the file
  *
- * Return: -1 if NULL in FN, 1 on success
+ * Return: 1 on success, -1 on failure
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-    int file, final_out, x;
+	FILE *fp;
 
-    file = open(filename, O_RDWR | O_APPEND);
-    if (filename == NULL)
-        return (-1);
-    if (file == -1)
-        return (-1);
-    if (text_content == NULL)
-        return (1);
-
-    x = 0;
-    while (*(text_content + x) != '\0')
-        x++;
-    final_out = write(file, text_content, x);
-    if (final_out == -1)
-        return (-1);
-
-    return (1);
+	if (filename == NULL)
+	{
+		return (-1);
+	}
+	fp = fopen(filename, "a");
+	if (fp == NULL)
+	{
+		return (-1);
+	}
+	if (text_content != NULL)
+	{
+		fputs(text_content, fp);
+	}
+	fclose(fp);
+	return (1);
 }
