@@ -2,9 +2,10 @@
 """Defines a function for calculating island perimeter."""
 
 def island_perimeter(grid):
-    """Calculate the perimeter of an island in the grid.
+    """
+    Calculate the perimeter of an island in the grid.
 
-    0 represents water, 1 represents land in the grid.
+    The grid uses 0 for water and 1 for land.
 
     Args:
         grid (list): List of lists with 0 for water and 1 for land.
